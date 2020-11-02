@@ -8,6 +8,10 @@ const api = {
 function App() {
 const [query, setQuery] = useState('');
 const [weather, setWeather] = useState({});
+const [unit, setUnit] = useState('imperial');
+
+//Imperial = true || Metric = false
+
 
 const search = evt => {
   if (evt.key === "Enter") {
@@ -21,7 +25,20 @@ const search = evt => {
     }
 }
 
-const dateBuilder = (d) => {
+const isUnit = () => {
+  unit === 'imperial' ? setUnit('metric') : setUnit('imperial');
+  console.log(unit);
+}
+
+const convertTemp = temp => {
+  if(unit === 'imperial') {
+    return Math.round((temp - 32) * (5/9)) + '°C';
+  } else {
+    return Math.round(temp) + '°F';
+  }
+}
+
+const dateBuilder = d => {
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -54,8 +71,8 @@ const dateBuilder = (d) => {
             <div className="date">{dateBuilder(new Date())}</div>
           </div>
           <div className="weather-box">
-            <div className="temp">
-              {Math.round(weather.main.temp)}°F
+            <div className="temp" onClick={isUnit}>
+              {convertTemp(weather.main.temp)}
             </div>
             <div className="weather">
               {weather.weather[0].description}

@@ -51,6 +51,7 @@ main {
 }
 
 .location-box .location {
+  margin-top: 25px;
   color: white;
   font-size: 32px;
   font-weight: 500;
@@ -84,6 +85,8 @@ main {
   text-shadow: 3px 6px rgba(50, 50, 70, .5);
   text-align: center;
   box-shadow: 3px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  user-select: none;
 }
 
 .weather-box .weather {
